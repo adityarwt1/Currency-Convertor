@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Currency Converter</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .converter {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    input,
+    select,
+    button {
+      margin: 10px 0;
+      padding: 10px;
+      width: 100%;
+      max-width: 300px;
+    }
+
+    #pop-up-container {
+      z-index: 1;
+      background-color: rgba(0, 0, 0, 0.7);
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      width: 1500px;
+      height: 12200px;
+      display: none;
+    }
+
+    #pop-up-Box {
+      z-index: 1;
+      width: 431px;
+      height: 275px;
+      color: white;
+      background-color: white;
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 25px;
+      padding: 5px;
+      text-align: center;
+
+    }
+
+    p {
+      color: black;
+    }
+    #okayOfPopUp{
+      border: none;
+    border-radius: 24px;
+    background-color: lightcoral;
+    font-size: 22px;
+    text-transform: uppercase;
+    font-family: cursive;
+    transition: 0.3s;
+
+    }
+    #okayOfPopUp:hover{
+      transform: scale(1.1);
+    }
+  </style>
+</head>
+
+<body>
+  <div class="converter">
+    <h2>Currency Converter</h2>
+    <input type="number" id="amount" placeholder="Enter amount" />
+    <select id="fromCurrency">
+      <option value="USD">USD</option>
+      <option value="INR">INR</option>
+    </select>
+    <select id="toCurrency">
+      <option value="USD">USD</option>
+      <option value="INR">INR</option>
+    </select>
+    <button id="convert" onclick="convertToRupee()">Convert</button>
+    <h3 id="result"></h3>
+
+  </div>
+  <div id="pop-up-container">
+    <div id="pop-up-Box">
+      <p style="    font-size: 34px;
+      font-weight: 600;
+      color: red;
+      font-family: cursive;">Warning!</p>
+      <p style="    font-family: cursive;
+    font-size: 18px;">You can't convert Currency without selecting both From and To Currency.</p>
+  <button id="okayOfPopUp" onclick="removePopUp()">Okay</button>
+    </div>
+  </div>
+  <script>
+    function convertToRupee() {
+      var amount = document.querySelector('#amount').value;
+      var usdToInr = document.querySelector(`#fromCurrency`).value;
+      var usdToInr2 = document.querySelector(`#toCurrency`).value;
+      if (usdToInr == "USD" && usdToInr2 == "INR") {
+        amount = eval(amount * 84.10)
+        document.querySelector(`#result`).textContent = Math.round(amount);
+      }
+      else if (usdToInr == "INR" && usdToInr2 == "USD") {
+        amount = eval(amount / 84.10)
+        document.querySelector(`#result`).textContent = Math.round(amount);
+      }
+      else {
+        document.querySelector(`#pop-up-container`).style.display = `flex`;
+      }
+    }
+    function removePopUp(){
+      document.getElementById("pop-up-container").style.display = "none";
+    }
+  </script>
+</body>
+
+</html>
